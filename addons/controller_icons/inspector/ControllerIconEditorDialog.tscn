@@ -1,0 +1,142 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5g776qihpter"]
+
+[ext_resource type="Script" uid="uid://s2l7agpwrm33" path="res://addons/controller_icons/inspector/ControllerIconEditorDialog.cs" id="1_r1wmx"]
+
+[node name="ControllerIconEditorDialog" type="ConfirmationDialog"]
+oversampling_override = 1.0
+title = "Input Selector"
+initial_position = 2
+size = Vector2i(600, 287)
+unresizable = true
+ok_button_text = "Select"
+script = ExtResource("1_r1wmx")
+
+[node name="TabControl" type="TabContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 592.0
+offset_bottom = 238.0
+current_tab = 0
+
+[node name="Input Actions" type="VBoxContainer" parent="TabControl"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ActionFilter" type="LineEdit" parent="TabControl/Input Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Filter by Action Name"
+
+[node name="ActionList" type="ItemList" parent="TabControl/Input Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 82
+item_0/text = "ui_accept (Enter or Kp Enter or Space)"
+item_1/text = "ui_select (Space)"
+item_2/text = "ui_cancel (Escape)"
+item_3/text = "ui_focus_next (Tab)"
+item_4/text = "ui_focus_prev (Shift+Tab)"
+item_5/text = "ui_left (Left)"
+item_6/text = "ui_right (Right)"
+item_7/text = "ui_up (Up)"
+item_8/text = "ui_down (Down)"
+item_9/text = "ui_page_up (PageUp)"
+item_10/text = "ui_page_down (PageDown)"
+item_11/text = "ui_home (Home)"
+item_12/text = "ui_end (End)"
+item_13/text = "ui_accessibility_drag_and_drop (Action has no bound inputs)"
+item_14/text = "ui_cut (Ctrl+X or Shift+Delete)"
+item_15/text = "ui_copy (Ctrl+C or Ctrl+Insert)"
+item_16/text = "ui_focus_mode (Ctrl+M)"
+item_17/text = "ui_paste (Ctrl+V or Shift+Insert)"
+item_18/text = "ui_undo (Ctrl+Z)"
+item_19/text = "ui_redo (Ctrl+Shift+Z or Ctrl+Y)"
+item_20/text = "ui_text_completion_query (Ctrl+Space)"
+item_21/text = "ui_text_completion_accept (Shift+Tab or Shift+Enter or Shift+Kp Enter)"
+item_22/text = "ui_text_completion_replace (Tab or Enter or Kp Enter)"
+item_23/text = "ui_text_newline (Enter or Kp Enter)"
+item_24/text = "ui_text_newline_blank (Ctrl+Enter or Ctrl+Kp Enter)"
+item_25/text = "ui_text_newline_above (Ctrl+Shift+Enter or Ctrl+Shift+Kp Enter)"
+item_26/text = "ui_text_indent (Tab)"
+item_27/text = "ui_text_dedent (Shift+Tab)"
+item_28/text = "ui_text_backspace (Backspace or Shift+Backspace)"
+item_29/text = "ui_text_backspace_word (Ctrl+Backspace)"
+item_30/text = "ui_text_backspace_all_to_left (Action has no bound inputs)"
+item_31/text = "ui_text_delete (Delete)"
+item_32/text = "ui_text_delete_word (Ctrl+Delete)"
+item_33/text = "ui_text_delete_all_to_right (Action has no bound inputs)"
+item_34/text = "ui_text_caret_left (Left)"
+item_35/text = "ui_text_caret_word_left (Ctrl+Left)"
+item_36/text = "ui_text_caret_right (Right)"
+item_37/text = "ui_text_caret_word_right (Ctrl+Right)"
+item_38/text = "ui_text_caret_up (Up)"
+item_39/text = "ui_text_caret_down (Down)"
+item_40/text = "ui_text_caret_line_start (Home)"
+item_41/text = "ui_text_caret_line_end (End)"
+item_42/text = "ui_text_caret_page_up (PageUp)"
+item_43/text = "ui_text_caret_page_down (PageDown)"
+item_44/text = "ui_text_caret_document_start (Ctrl+Home)"
+item_45/text = "ui_text_caret_document_end (Ctrl+End)"
+item_46/text = "ui_text_caret_add_below (Ctrl+Shift+Down)"
+item_47/text = "ui_text_caret_add_above (Ctrl+Shift+Up)"
+item_48/text = "ui_text_scroll_up (Ctrl+Up)"
+item_49/text = "ui_text_scroll_down (Ctrl+Down)"
+item_50/text = "ui_text_select_all (Ctrl+A)"
+item_51/text = "ui_text_select_word_under_caret (Alt+G)"
+item_52/text = "ui_text_add_selection_for_next_occurrence (Ctrl+D)"
+item_53/text = "ui_text_skip_selection_for_next_occurrence (Ctrl+Alt+D)"
+item_54/text = "ui_text_clear_carets_and_selection (Escape)"
+item_55/text = "ui_text_toggle_insert_mode (Insert)"
+item_56/text = "ui_menu (Menu)"
+item_57/text = "ui_text_submit (Enter or Kp Enter)"
+item_58/text = "ui_unicode_start (Ctrl+Shift+U)"
+item_59/text = "ui_graph_duplicate (Ctrl+D)"
+item_60/text = "ui_graph_delete (Delete)"
+item_61/text = "ui_graph_follow_left (Ctrl+Left)"
+item_62/text = "ui_graph_follow_right (Ctrl+Right)"
+item_63/text = "ui_filedialog_up_one_level (Backspace)"
+item_64/text = "ui_filedialog_refresh (F5)"
+item_65/text = "ui_filedialog_show_hidden (H)"
+item_66/text = "ui_swap_input_direction (Ctrl+QuoteLeft)"
+item_67/text = "ui_colorpicker_delete_preset (Delete)"
+item_68/text = "spatial_editor/viewport_orbit_modifier_1 (Action has no bound inputs)"
+item_69/text = "spatial_editor/viewport_orbit_modifier_2 (Action has no bound inputs)"
+item_70/text = "spatial_editor/viewport_pan_modifier_1 (Shift)"
+item_71/text = "spatial_editor/viewport_pan_modifier_2 (Action has no bound inputs)"
+item_72/text = "spatial_editor/viewport_zoom_modifier_1 (Ctrl)"
+item_73/text = "spatial_editor/viewport_zoom_modifier_2 (Action has no bound inputs)"
+item_74/text = "spatial_editor/freelook_left (A (Physical))"
+item_75/text = "spatial_editor/freelook_right (D (Physical))"
+item_76/text = "spatial_editor/freelook_forward (W (Physical))"
+item_77/text = "spatial_editor/freelook_backwards (S (Physical))"
+item_78/text = "spatial_editor/freelook_up (E (Physical))"
+item_79/text = "spatial_editor/freelook_down (Q (Physical))"
+item_80/text = "spatial_editor/freelook_speed_modifier (Shift)"
+item_81/text = "spatial_editor/freelook_slow_modifier (Alt)"
+
+[node name="Keys or Buttons" type="VBoxContainer" parent="TabControl"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabControl/Keys or Buttons"]
+layout_mode = 2
+
+[node name="ListenButton" type="Button" parent="TabControl/Keys or Buttons/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Listen Input"
+
+[node name="InputFilter" type="LineEdit" parent="TabControl/Keys or Buttons/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "FIlter by Input Name"
+
+[node name="InputList" type="Tree" parent="TabControl/Keys or Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+hide_root = true
