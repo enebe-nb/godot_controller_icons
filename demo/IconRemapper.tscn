@@ -1,175 +1,230 @@
-[gd_scene load_steps=24 format=3 uid="uid://cmopiwmgjwjb8"]
+[gd_scene load_steps=44 format=3 uid="uid://cmopiwmgjwjb8"]
 
-[ext_resource type="Script" path="res://demo/IconRemapper.gd" id="2"]
-[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="2_ww1q8"]
+[ext_resource type="Script" uid="uid://b2gr1mfsktb0" path="res://demo/IconRemapper.cs" id="1_ocbwx"]
+[ext_resource type="Script" uid="uid://djic5mgoyoru6" path="res://addons/controller_icons/ControllerIconTexture.cs" id="2_ww1q8"]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ocbwx"]
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_oaqcv"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/a"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/a"
+InputKeys = SubResource("InputEventJoypadButton_ocbwx")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_m3fda"]
+button_index = 1
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_julos"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/b"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/b"
+InputKeys = SubResource("InputEventJoypadButton_m3fda")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_b2r7t"]
+button_index = 2
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_p7fj8"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/x"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/x"
+InputKeys = SubResource("InputEventJoypadButton_b2r7t")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_04i1v"]
+button_index = 3
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_e65pp"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/y"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/y"
+InputKeys = SubResource("InputEventJoypadButton_04i1v")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_d2c5o"]
+button_index = 9
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_drwxf"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/lb"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/lb"
+InputKeys = SubResource("InputEventJoypadButton_d2c5o")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_a6cyh"]
+button_index = 10
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_lpg8q"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/rb"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/rb"
+InputKeys = SubResource("InputEventJoypadButton_a6cyh")
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_fgnc5"]
+axis = 4
+axis_value = 0.53724784
 
 [sub_resource type="Texture2D" id="Texture2D_tqj64"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/lt"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/lt"
+InputKeys = SubResource("InputEventJoypadMotion_fgnc5")
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_dtkf7"]
+axis = 5
+axis_value = 0.53724784
 
 [sub_resource type="Texture2D" id="Texture2D_g8v8u"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/rt"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/rt"
+InputKeys = SubResource("InputEventJoypadMotion_dtkf7")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_4xoef"]
+button_index = 7
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_uqh53"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/l_stick_click"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/l_stick_click"
+InputKeys = SubResource("InputEventJoypadButton_4xoef")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_o18xl"]
+button_index = 8
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_jt7n0"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/r_stick_click"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/r_stick_click"
+InputKeys = SubResource("InputEventJoypadButton_o18xl")
 
-[sub_resource type="Texture2D" id="Texture2D_jmm2v"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("2_ww1q8")
-path = "joypad/select"
-show_mode = 0
-force_type = 0
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_8wp68"]
+button_index = 6
 
 [sub_resource type="Texture2D" id="Texture2D_2w7la"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/start"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/start"
+InputKeys = SubResource("InputEventJoypadButton_8wp68")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_gylpk"]
+button_index = 4
+pressed = true
+
+[sub_resource type="Texture2D" id="Texture2D_jmm2v"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_ww1q8")
+ActionName = &"joypad/select"
+InputKeys = SubResource("InputEventJoypadButton_gylpk")
 
 [sub_resource type="Texture2D" id="Texture2D_rhnqu"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/dpad"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/dpad"
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_8sswi"]
+button_index = 11
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_vr4j2"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/dpad_up"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/dpad_up"
+InputKeys = SubResource("InputEventJoypadButton_8sswi")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_8sm3j"]
+button_index = 12
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_hp6k2"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/dpad_down"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/dpad_down"
+InputKeys = SubResource("InputEventJoypadButton_8sm3j")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_6h17y"]
+button_index = 13
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_4trym"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/dpad_left"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/dpad_left"
+InputKeys = SubResource("InputEventJoypadButton_6h17y")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_3oblh"]
+button_index = 14
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_61h51"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/dpad_right"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/dpad_right"
+InputKeys = SubResource("InputEventJoypadButton_3oblh")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_5r1wk"]
+button_index = 5
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_adhf2"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/home"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/home"
+InputKeys = SubResource("InputEventJoypadButton_5r1wk")
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_268as"]
+button_index = 15
+pressed = true
 
 [sub_resource type="Texture2D" id="Texture2D_dl7nm"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/share"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/share"
+InputKeys = SubResource("InputEventJoypadButton_268as")
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_puq4y"]
+axis_value = -0.56078434
 
 [sub_resource type="Texture2D" id="Texture2D_3ry3e"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/l_stick"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/l_stick"
+InputKeys = SubResource("InputEventJoypadMotion_puq4y")
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_8navn"]
+axis = 2
+axis_value = 0.5137255
 
 [sub_resource type="Texture2D" id="Texture2D_t68xw"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ww1q8")
-path = "joypad/r_stick"
-show_mode = 0
-force_type = 0
+ActionName = &"joypad/r_stick"
+InputKeys = SubResource("InputEventJoypadMotion_8navn")
 
 [node name="Control" type="MarginContainer"]
 anchors_preset = 15
@@ -183,7 +238,7 @@ theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
-script = ExtResource("2")
+script = ExtResource("1_ocbwx")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -338,20 +393,6 @@ expand_mode = 1
 layout_mode = 2
 text = " Right Stick Click"
 
-[node name="Select" type="HBoxContainer" parent="HBoxContainer/Icons/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="ControllerTextureRect" type="TextureRect" parent="HBoxContainer/Icons/VBoxContainer/Select"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = SubResource("Texture2D_jmm2v")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="HBoxContainer/Icons/VBoxContainer/Select"]
-layout_mode = 2
-text = " Select"
-
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/Icons"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -371,8 +412,23 @@ expand_mode = 1
 layout_mode = 2
 text = " Start"
 
+[node name="Select" type="HBoxContainer" parent="HBoxContainer/Icons/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ControllerTextureRect" type="TextureRect" parent="HBoxContainer/Icons/VBoxContainer2/Select"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = SubResource("Texture2D_jmm2v")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/Icons/VBoxContainer2/Select"]
+layout_mode = 2
+text = " Select"
+
 [node name="DPAD" type="HBoxContainer" parent="HBoxContainer/Icons/VBoxContainer2"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="ControllerTextureRect" type="TextureRect" parent="HBoxContainer/Icons/VBoxContainer2/DPAD"]
@@ -571,17 +627,17 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Xbox Series"
 
-[connection signal="pressed" from="HBoxContainer/Buttons/Auto" to="." method="_on_Auto_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/Luna" to="." method="_on_Luna_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/PS3" to="." method="_on_PS3_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/PS4" to="." method="_on_PS4_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/PS5" to="." method="_on_PS5_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/Stadia" to="." method="_on_Stadia_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/Steam" to="." method="_on_Steam_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/SteamDeck" to="." method="_on_SteamDeck_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/Switch" to="." method="_on_Switch_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/Joycon" to="." method="_on_Joycon_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/OUYA" to="." method="_on_ouya_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/Xbox360" to="." method="_on_Xbox360_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/XboxOne" to="." method="_on_XboxOne_pressed"]
-[connection signal="pressed" from="HBoxContainer/Buttons/XboxSeries" to="." method="_on_XboxSeries_pressed"]
+[connection signal="pressed" from="HBoxContainer/Buttons/Auto" to="." method="SetControllerType" binds= [&"Auto"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/Luna" to="." method="SetControllerType" binds= [&"Luna Controller"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/PS3" to="." method="SetControllerType" binds= [&"PS3 Controller"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/PS4" to="." method="SetControllerType" binds= [&"PS4 Controller"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/PS5" to="." method="SetControllerType" binds= [&"PS5 Controller"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/Stadia" to="." method="SetControllerType" binds= [&"Stadia Controller"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/Steam" to="." method="SetControllerType" binds= [&"Steam Controller"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/SteamDeck" to="." method="SetControllerType" binds= [&"Steam Deck"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/Switch" to="." method="SetControllerType" binds= [&"Switch Controller"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/Joycon" to="." method="SetControllerType" binds= [&"Joy-Con"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/OUYA" to="." method="SetControllerType" binds= [&"OUYA Controller"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/Xbox360" to="." method="SetControllerType" binds= [&"Xbox 360 Controller"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/XboxOne" to="." method="SetControllerType" binds= [&"Xbox One"]]
+[connection signal="pressed" from="HBoxContainer/Buttons/XboxSeries" to="." method="SetControllerType" binds= [&"Xbox Series"]]
