@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 // [Texture2D] proxy for displaying controller icons
@@ -89,9 +90,11 @@ public partial class ControllerIconTexture : Texture2D {
 	private Texture2D[] Textures {
 		get => _textures;
 		set {
-			foreach(var tex in _textures) tex.Changed -= ReloadResource;
+			foreach(var tex in _textures) tex.Changed -= EmitChanged;
 			_textures = value;
-			foreach(var tex in _textures) tex.Changed += ReloadResource;
+			foreach(var tex in _textures) tex.Changed += EmitChanged;
+			Clear3DView();
+			EmitChanged();
 		}
 	}
 
@@ -99,6 +102,11 @@ public partial class ControllerIconTexture : Texture2D {
 		// Register for delayed setup, but try to do it anyway if already ready.
 		RenderingServer.FramePostDraw += Setup;
 		Setup();
+	}
+
+	protected override void Dispose(bool disposing) {
+		Clear3DView();
+		base.Dispose(disposing);
 	}
 
 	private void Setup() {
@@ -141,7 +149,6 @@ public partial class ControllerIconTexture : Texture2D {
 			RenderingServer.FramePostDraw -= RequestTexturesLoop;
 			_isLoading = false;
 			Textures = [];
-			ReloadResource();
 			return;
 		}
 
@@ -149,13 +156,6 @@ public partial class ControllerIconTexture : Texture2D {
 		RenderingServer.FramePostDraw -= RequestTexturesLoop;
 		_isLoading = false;
 		Textures = [.. _textureFiles.Select(file => (Texture2D)ResourceLoader.LoadThreadedGet(file))];
-		ReloadResource();
-	}
-
-	// Mark this texture for redraw
-	private void ReloadResource() {
-		Dirty = true;
-		EmitChanged();
 	}
 
 	// Get events regitered in InputMap with the action name
@@ -216,26 +216,24 @@ public partial class ControllerIconTexture : Texture2D {
 
 
 	public override void _Draw(Rid toCanvasItem, Vector2 pos, Color modulate, bool transpose) {
-		GD.Print("Draw1!");
+		int height = _GetHeight();
 		for (int i = 0; i < Textures.Length; ++i) {
 			Texture2D tex = Textures[i];
 			if (tex == null) continue;
 
 			if (i != 0) {
 				// Draw "plus" symbol
-				_concatTexture.Draw(toCanvasItem, pos, modulate, transpose);
+				Vector2 offset = new(pos.X, pos.Y + (height - _concatTexture.GetHeight())/2);
+				_concatTexture.Draw(toCanvasItem, offset, modulate, transpose);
 				pos.X += _concatTexture.GetWidth();
-				// TODO vertical alignment
 			}
 
-			// position += new Vector2(TextSize.X, 0);
-			tex.Draw(toCanvasItem, pos, modulate, transpose);
+			tex.Draw(toCanvasItem, new(pos.X, pos.Y + (height - tex.GetHeight())/2), modulate, transpose);
 			pos.X += tex.GetWidth();
 		}
 	}
 
 	public override void _DrawRect(Rid toCanvasItem, Rect2 rect, bool tile, Color modulate, bool transpose) {
-		GD.Print("Draw2!");
 		Vector2 pos = rect.Position;
 		float widthRatio = rect.Size.X / _GetWidth();
 		float heightRatio = rect.Size.Y / _GetHeight();
@@ -247,23 +245,19 @@ public partial class ControllerIconTexture : Texture2D {
 			if (i != 0) {
 				// Draw "plus" symbol
 				Vector2 concatSize = _concatTexture.GetSize() * new Vector2(widthRatio, heightRatio);
-				_concatTexture.DrawRect(toCanvasItem, new Rect2(pos, concatSize), tile, modulate, transpose);
+				Vector2 offset = new(pos.X, pos.Y + (rect.Size.Y - concatSize.Y)/2);
+				_concatTexture.DrawRect(toCanvasItem, new Rect2(offset, concatSize), tile, modulate, transpose);
 				pos.X += concatSize.X;
-				// TODO vertical alignment
-				// Vector2 font_position = new Vector2(
-				// 	position.X,
-				// 	position.Y + (GetHeight() - TextSize.Y) / 2.0f
-				// );
 			}
 
 			Vector2 size = tex.GetSize() * new Vector2(widthRatio, heightRatio);
-			tex.DrawRect(toCanvasItem, new Rect2(pos, size), tile, modulate, transpose);
+			Rect2 frame = new (new (pos.X, pos.Y + (rect.Size.Y - size.Y)/2), size);
+			tex.DrawRect(toCanvasItem, frame, tile, modulate, transpose);
 			pos.X += size.X;
 		}
 	}
 
 	public override void _DrawRectRegion(Rid toCanvasItem, Rect2 rect, Rect2 srcRect, Color modulate, bool transpose, bool clipUV) {
-		GD.Print("Draw3!");
 		Vector2 pos = rect.Position;
 		float widthRatio = rect.Size.X / _GetWidth();
 		float heightRatio = rect.Size.Y / _GetHeight();
@@ -280,13 +274,9 @@ public partial class ControllerIconTexture : Texture2D {
 					tex.GetHeight() / (float)_GetHeight()
 				);
 				Rect2 concatSrcRect = new(srcRect.Position * concatRectRatio, srcRect.Size * concatRectRatio);
-				_concatTexture.DrawRectRegion(toCanvasItem, new Rect2(pos, concatSize), concatSrcRect, modulate, transpose, clipUV);
+				Rect2 concatDstRect = new(new(pos.X, pos.Y + (rect.Size.Y - concatSize.Y)/2), concatSize);
+				_concatTexture.DrawRectRegion(toCanvasItem, concatDstRect, concatSrcRect, modulate, transpose, clipUV);
 				pos.X += concatSize.X;
-				// TODO vertical alignment
-				// Vector2 fontPosition = new(
-				// 	position.X + (TextSize.X * widthRatio) / 2 - (TextSize.X / 2),
-				// 	position.Y + (rect.Size.Y - TextSize.Y) / 2.0f
-				// );
 			}
 
 			Vector2 size = tex.GetSize() * new Vector2(widthRatio, heightRatio);
@@ -296,94 +286,43 @@ public partial class ControllerIconTexture : Texture2D {
 				tex.GetHeight() / (float)_GetHeight()
 			);
 			Rect2 texSrcRect = new(srcRect.Position * srcRectRatio, srcRect.Size * srcRectRatio);
-
-			tex.DrawRectRegion(toCanvasItem, new Rect2(pos, size), texSrcRect, modulate, transpose, clipUV);
+			Rect2 texDstRect = new(new(pos.X, pos.Y + (rect.Size.Y - size.Y)/2), size);
+			tex.DrawRectRegion(toCanvasItem, texDstRect, texSrcRect, modulate, transpose, clipUV);
 			pos.X += size.X;
 		}
 	}
 
-	private SubViewport HelperViewport;
-	private bool IsStitchingTexture = false;
-	private async void StitchTexture() {
-		GD.Print("Draw4!");
-		if (Textures.Length == 0) return;
-		IsStitchingTexture = true;
-		Image fontImage = null;
-		if (Textures.Length > 1) {
-			// Generate a viewport to draw the text
-			HelperViewport = new SubViewport {
-				// FIXME: We need a 3px margin for some reason
-				// Size = (Vector2I)(TextSize + new Vector2(3, 0)),
+	// Using Viewport as workaround for 3D
+	private SubViewport HelperViewport = null;
+	private async void Create3DView() {
+		if (HelperViewport != null) return;
+		HelperViewport = new SubViewport {
+			RenderTargetUpdateMode = SubViewport.UpdateMode.Once,
+			RenderTargetClearMode = SubViewport.ClearMode.Once,
+			TransparentBg = true,
+			Size = new Vector2I(GetWidth(), GetHeight()),
+		};
 
-				RenderTargetUpdateMode = SubViewport.UpdateMode.Once,
-				RenderTargetClearMode = SubViewport.ClearMode.Once,
-				TransparentBg = true
-			};
-
-			// Label label = new() {
-			// 	LabelSettings = LabelSettings,
-			// 	Text = "+",
-			// 	Position = Vector2.Zero
-			// };
-
-			// HelperViewport.AddChild(label);
-
-			ControllerIconManager.Instance.AddChild(HelperViewport);
-			//await RenderingServer.FramePostDraw;
-			await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
-			fontImage = HelperViewport.GetTexture().GetImage();
-
-			ControllerIconManager.Instance.RemoveChild(HelperViewport);
-			HelperViewport.Free();
-		}
-
-		Vector2I position = new(0, 0);
-
-		Image img = new();
-		for (int i = 0; i < Textures.Length; ++i) {
-			if (Textures[i] == null) continue;
-
-			if (i != 0) {
-				// Draw text char '+'
-				Rect2I region = fontImage.GetUsedRect();
-				Vector2I fontPosition = new(
-					position.X,
-					position.Y + (GetHeight() - region.Size.Y) / 2
-				);
-
-				img.BlitRect( fontImage, region, fontPosition );
-				position += new Vector2I( region.Size.X, 0 );
-			}
-
-			Image textureRaw = Textures[i].GetImage();
-			textureRaw.Decompress();
-			img ??= Image.CreateEmpty(_GetWidth(), _GetHeight(), true, textureRaw.GetFormat());
-			img.BlitRect(textureRaw, new Rect2I(0, 0, textureRaw.GetWidth(), textureRaw.GetHeight()), position);
-
-			position += new Vector2I( textureRaw.GetWidth(), 0 );
-		}
-
-		IsStitchingTexture = false;
-
-		Dirty = false;
-		Texture3D = ImageTexture.CreateFromImage(img);
+		HelperViewport.AddChild(new TextureRect{ Texture = this });
+		ControllerIconManager.Instance.AddChild(HelperViewport);
+		await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
 		EmitChanged();
 	}
 
-	// This is necessary for 3D sprites, as the texture is assigned to a material, and not drawn directly.
-	// For multi prompts, we need to generate a texture
-	private bool Dirty = true;
+	private void Clear3DView() {
+		if (HelperViewport == null) return;
+		ControllerIconManager.Instance.RemoveChild(HelperViewport);
+		HelperViewport.QueueFree();
+		HelperViewport = null;
+	}
 
-	private Texture Texture3D;
 	public override Rid _GetRid() {
-		if (Dirty) {
-			if (!IsStitchingTexture) StitchTexture();
-				// FIXME: Function may await, but because this is an internal engine call, we can't do anything about it.
-				// This results in a one-frame white texture being displayed, which is not ideal. Investigate later.
+		// ignore empty results
+		if (Textures.Length == 0) return new Rid(null);
+		// If there's only one, we don't need to do anything
+		if (Textures.Length == 1) return Textures[0].GetRid();
 
-			if (IsStitchingTexture) return new Rid(null);
-			else return new Rid(null);
-		}
-		return Textures.Length > 0 ? Texture3D.GetRid() : new Rid(null);
+		if (HelperViewport == null) Create3DView();
+		return HelperViewport.GetTexture().GetRid();
 	}
 }
