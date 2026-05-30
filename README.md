@@ -7,6 +7,14 @@ Provides icons for all major controllers and keyboard/mouse actions, with an aut
 > [!IMPORTANT]
 > This is the Godot 4.x version. For the Godot 3.x version, check the [3.x branch](https://github.com/rsubtil/controller_icons/tree/3.x)
 
+### CSharp Rewrite Changes:
+- Moved global settings to `ProjectSettings`
+- Changed input selector system to be controlled by Mappers, now a Mapper factory can be registered to control this behaviour
+- Simplified control properties to use Events instead of strings
+- Changed 3D textures to use Viewport instead of Image baking
+- Using a Image to merge events with multikeys
+- Renamed all resources (because i didn't liked it)
+
 ## Features
 
 - Parse input actions and assign respective icons for keyboard/mouse and controller
@@ -15,11 +23,7 @@ Provides icons for all major controllers and keyboard/mouse actions, with an aut
 
 - Automatically detects input between keyboard/mouse and controller and switches icons on-the-fly corresponding to the controller's type
 
-![](screenshots/2.png)
-
-- Handles generic controller paths to support many different button icons
-
-![](screenshots/3.png)
+- When attached to a Joypad event, automatically detectes the controller to support many different button icons
 
 - Ships with default assets for keyboard and mouse, and most popular controllers:
 	- Xbox 360
@@ -28,24 +32,21 @@ Provides icons for all major controllers and keyboard/mouse actions, with an aut
 	- PlayStation 3
 	- PlayStation 4
 	- PlayStation 5
-	- Nintendo Switch Controller / Joy-Con
-	- Steam Controller
-	- Steam Deck
-	- Amazon Luna
-	- Google Stadia
-	- OUYA
+	- ~~Nintendo Switch Controller / Joy-Con~~
+	- ~~Steam Controller~~
+	- ~~Steam Deck~~
+	- ~~Amazon Luna~~
+	- ~~Google Stadia~~
+	- ~~OUYA~~
+
+(some require more tests)
 
 ## Installation
 
 > [!IMPORTANT]
 > This is the Godot 4.x version. For the Godot 3.x version, check the [3.x branch](https://github.com/rsubtil/controller_icons/tree/3.x)
 
-> [!NOTE]
-> If you're using C#, there are currently some engine bugs affecting the addon's usage. For a C# version of the addon, check out [Jace Varlet's fork instead](https://github.com/jembawls/controller_icons_csharp).
->
-> A special thanks to Jace for porting this addon to C#. Please check out [their work](https://linktr.ee/jembawls)!
-
-The minimum Godot version is 4.1.2 (stable).
+The minimum Godot version is 4.5 (stable).
 
 Download this repository and copy the `addons` folder to your project root directory.
 
